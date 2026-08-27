@@ -12,3 +12,5 @@ La consulenza finanziaria sta vivendo una fase di profonda evoluzione, e confron
 Nell'era dell'*hybrid advisory* l'algoritmo elabora i dati, ma il consulente umano rimane l'indispensabile garante fiduciario ed etico: mantiene la responsabilità e la gestione strategica delle decisioni. È il cuore dello human-in-the-loop: la macchina assiste e potenzia, ma è l'uomo che governa e garantisce.
 
 L'automazione pura ha già mostrato i suoi limiti. La risposta del mercato è ibrida — la macchina processa, il professionista decide — e la responsabilità resta sempre in capo all'intermediario. Nel nuovo ecosistema algoritmico, il consulente diventa l'ultimo garante fiduciario tra efficienza tecnologica e tutela del risparmiatore.
+
+Ho sviluppato per esteso questo ragionamento in un contributo pubblicato su [FIA – Financial Insight Assoreti](https://fia.assoreti.it/lintelligenza-artificiale-nella-consulenza-finanziaria-verso-un-modello-di-hybrid-advisory-tra-efficienza-operativa-e-tutela-del-risparmiatore/).

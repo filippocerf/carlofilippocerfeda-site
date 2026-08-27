@@ -12,3 +12,5 @@ Financial advisory is going through a phase of deep change, and engaging with th
 In the era of *hybrid advisory* the algorithm processes the data, but the human advisor remains the indispensable fiduciary and ethical guarantor: they keep the responsibility and the strategic management of decisions. This is the heart of human-in-the-loop: the machine assists and amplifies, but it is the person who governs and guarantees.
 
 Pure automation has already shown its limits. The market's answer is hybrid — the machine processes, the professional decides — and responsibility always stays with the intermediary. In the new algorithmic ecosystem, the advisor becomes the last fiduciary guarantor between technological efficiency and investor protection.
+
+I developed this reasoning at length in a contribution published on [FIA – Financial Insight Assoreti](https://fia.assoreti.it/lintelligenza-artificiale-nella-consulenza-finanziaria-verso-un-modello-di-hybrid-advisory-tra-efficienza-operativa-e-tutela-del-risparmiatore/).
