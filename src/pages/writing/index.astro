@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import WritingList from '../../components/views/WritingList.astro';
+import { t } from '../../i18n/ui';
+const tr = t('it');
+---
+
+<Base lang="it" current="writing" title={tr('writing.title')} description={tr('writing.intro')}>
+  <WritingList lang="it" />
+</Base>

@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../site.config';
+import type { Lang } from '../site.config';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  current?: 'home' | 'writing' | 'projects' | 'about';
+  wide?: boolean;
+}
+const { lang, title, description, current, wide = false } = Astro.props;
+const pageTitle = title ? `${title} — ${site.name}` : site.name;
+const desc = description ?? site.bioShort[lang];
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <meta name="author" content={site.name} />
+    <link rel="canonical" href={Astro.url.href} />
+
+    <!-- Open Graph / condivisione social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_US'} />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Font: Google Fonts con fallback di sistema -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header lang={lang} current={current} />
+    <main>
+      <div class:list={['container', { 'container-wide': wide }]}>
+        <slot />
+      </div>
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

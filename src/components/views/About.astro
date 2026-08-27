@@ -1,0 +1,49 @@
+---
+import { site } from '../../site.config';
+import { t } from '../../i18n/ui';
+import type { Lang } from '../../site.config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+
+// ---------------------------------------------------------------
+//  TESTO "CHI SONO" — modifica liberamente questi due blocchi.
+//  Sono i paragrafi lunghi che i recruiter leggono per capire chi sei.
+// ---------------------------------------------------------------
+const about = {
+  it: [
+    'Sono Carlo Filippo Cerfeda, giurista: laurea in Giurisprudenza con 110/110 e lode all’Università del Salento e praticante avvocato. Lavoro nel team Innovation di Linklaters, dove porto l’intelligenza artificiale dentro il lavoro legale.',
+    'Mi occupo di automazione documentale, ottimizzazione dei workflow e intelligenza artificiale generativa applicata allo studio: strumenti come OpenAI, Gemini, Microsoft Copilot e Legora non sostituiscono il giurista, ma ne alleggeriscono i controlli formali e ne consolidano la responsabilità sostanziale. Unisco un’impostazione classica a un approccio da prodotto, ossia trasformare un’esigenza giuridica in uno strumento digitale semplice, sicuro e time-saving.',
+    'Mi interessa il punto in cui il diritto incontra la tecnologia: ho dedicato un contributo al modello di consulenza ibrida nell’advisory finanziario, in cui l’algoritmo elabora i dati mentre il consulente resta il garante fiduciario della decisione. Il lavoro è stato premiato ai FIA Awards di Assoreti, con la borsa di studio e l’inclusione nel programma FIA Talent 2026.',
+    'Questo sito raccoglie in un unico spazio i progetti a cui lavoro, le riflessioni che porto con me e i commenti agli articoli che leggo, dentro e fuori dallo studio. Resto a disposizione per un confronto.',
+  ],
+  en: [
+    'I am Carlo Filippo Cerfeda, a jurist: a law graduate with 110/110 cum laude from the University of Salento and a trainee lawyer. I work in Linklaters’ Innovation team, where I bring artificial intelligence into legal work.',
+    'I work on document automation, workflow optimization and generative artificial intelligence applied to the firm: tools such as OpenAI, Gemini, Microsoft Copilot and Legora do not replace the jurist, but ease the formal checks and consolidate substantive responsibility. I combine a classical training with a product mindset, that is, turning a legal need into a digital tool that is simple, secure and time-saving.',
+    'I am drawn to where law meets technology: I devoted a contribution to the hybrid advisory model in financial consulting, in which the algorithm processes the data while the advisor remains the fiduciary guarantor of the decision. The work was recognized at the Assoreti FIA Awards, with a scholarship and a place in the FIA Talent 2026 programme.',
+    'This site gathers in a single space the projects I work on, the reflections I carry with me and my commentary on the articles I read, inside and outside the firm. I remain available for a conversation.',
+  ],
+};
+
+const contactLinks = [
+  site.links.linkedin && { label: 'LinkedIn', href: site.links.linkedin },
+  site.links.github && { label: 'GitHub', href: site.links.github },
+  site.links.x && { label: 'X', href: site.links.x },
+  site.links.email && { label: 'Email', href: site.links.email },
+].filter(Boolean) as { label: string; href: string }[];
+---
+
+<div class="page-head">
+  <h1>{tr('about.title')}</h1>
+</div>
+
+<div class="prose">
+  {about[lang].map((para) => <p>{para}</p>)}
+</div>
+
+<div class="project-links" style="margin-top:2rem;">
+  {contactLinks.map((l) => <a class="btn" href={l.href}>{l.label}</a>)}
+</div>

@@ -1,0 +1,32 @@
+---
+import { t } from '../../i18n/ui';
+import { getProjects } from '../../utils';
+import ProjectCard from '../ProjectCard.astro';
+import type { Lang } from '../../site.config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+const projects = await getProjects(lang);
+---
+
+<div class="page-head">
+  <h1>{tr('projects.title')}</h1>
+  <p>{tr('projects.intro')}</p>
+</div>
+
+{
+  projects.length > 0 ? (
+    <ul class="card-list">
+      {projects.map((entry) => (
+        <li>
+          <ProjectCard entry={entry} lang={lang} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="empty-state">{tr('projects.empty')}</div>
+  )
+}

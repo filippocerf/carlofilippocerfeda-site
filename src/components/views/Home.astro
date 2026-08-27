@@ -1,0 +1,75 @@
+---
+import { site } from '../../site.config';
+import { t, localePath } from '../../i18n/ui';
+import { getWriting, getProjects } from '../../utils';
+import PostCard from '../PostCard.astro';
+import ProjectCard from '../ProjectCard.astro';
+import type { Lang } from '../../site.config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+
+const writing = (await getWriting(lang)).slice(0, 3);
+const projects = (await getProjects(lang)).filter((p) => p.data.featured).slice(0, 3);
+const projectsToShow = projects.length > 0 ? projects : (await getProjects(lang)).slice(0, 3);
+---
+
+<section class="hero">
+  <span class="role-badge">{site.role[lang]}</span>
+  <h1>{site.name}</h1>
+  <p class="tagline">{site.tagline[lang]}</p>
+  <p class="bio">{site.bioShort[lang]}</p>
+  <div class="actions">
+    <a class="btn btn-primary" href={localePath(lang, 'projects')}>{tr('nav.projects')}</a>
+    <a class="btn" href={localePath(lang, 'writing')}>{tr('nav.writing')}</a>
+    {site.links.linkedin && <a class="btn" href={site.links.linkedin}>LinkedIn</a>}
+  </div>
+</section>
+
+{
+  writing.length > 0 && (
+    <>
+      <div class="section-head">
+        <h2>{tr('home.latestWriting')}</h2>
+        <a href={localePath(lang, 'writing')}>{tr('home.viewAll')} →</a>
+      </div>
+      <ul class="card-list">
+        {writing.map((entry) => (
+          <li>
+            <PostCard entry={entry} lang={lang} />
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
+{
+  projectsToShow.length > 0 && (
+    <>
+      <div class="section-head">
+        <h2>{tr('home.featuredProjects')}</h2>
+        <a href={localePath(lang, 'projects')}>{tr('home.viewAll')} →</a>
+      </div>
+      <ul class="card-list">
+        {projectsToShow.map((entry) => (
+          <li>
+            <ProjectCard entry={entry} lang={lang} />
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
+<div class="section-head">
+  <h2>{tr('contact.title')}</h2>
+</div>
+<p class="muted">{tr('contact.line')}</p>
+<div class="project-links">
+  {site.links.linkedin && <a class="btn" href={site.links.linkedin}>LinkedIn</a>}
+  <a class="btn" href={`mailto:${site.email}`}>Email</a>
+</div>

@@ -1,0 +1,32 @@
+---
+import { t, localePath } from '../i18n/ui';
+import { formatDate, baseSlug, type WritingEntry } from '../utils';
+import type { Lang } from '../site.config';
+
+interface Props {
+  entry: WritingEntry;
+  lang: Lang;
+}
+const { entry, lang } = Astro.props;
+const tr = t(lang);
+const href = localePath(lang, `writing/${baseSlug(entry.slug)}`);
+const typeLabel = entry.data.type === 'commentary' ? tr('type.commentary') : tr('type.thought');
+---
+
+<a class="card" href={href}>
+  <div class="card-meta">
+    <span class="badge badge-accent">{typeLabel}</span>
+    <time datetime={entry.data.pubDate.toISOString()}>{formatDate(entry.data.pubDate, lang)}</time>
+  </div>
+  <h3>{entry.data.title}</h3>
+  <p>{entry.data.description}</p>
+  {
+    entry.data.tags.length > 0 && (
+      <div class="tag-row">
+        {entry.data.tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    )
+  }
+</a>

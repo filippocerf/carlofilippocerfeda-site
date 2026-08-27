@@ -1,0 +1,28 @@
+---
+import { site } from '../site.config';
+import { t } from '../i18n/ui';
+import type { Lang } from '../site.config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+const year = new Date().getFullYear();
+
+const links = [
+  site.links.github && { label: 'GitHub', href: site.links.github },
+  site.links.linkedin && { label: 'LinkedIn', href: site.links.linkedin },
+  site.links.x && { label: 'X', href: site.links.x },
+  site.links.email && { label: 'Email', href: site.links.email },
+].filter(Boolean) as { label: string; href: string }[];
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© {site.startYear}–{year} {site.name}. {tr('footer.builtWith')}</span>
+    <span style="display:flex; gap:1rem; flex-wrap:wrap;">
+      {links.map((l) => <a href={l.href} rel="me">{l.label}</a>)}
+    </span>
+  </div>
+</footer>

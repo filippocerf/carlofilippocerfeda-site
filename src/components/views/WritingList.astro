@@ -1,0 +1,32 @@
+---
+import { t } from '../../i18n/ui';
+import { getWriting } from '../../utils';
+import PostCard from '../PostCard.astro';
+import type { Lang } from '../../site.config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+const writing = await getWriting(lang);
+---
+
+<div class="page-head">
+  <h1>{tr('writing.title')}</h1>
+  <p>{tr('writing.intro')}</p>
+</div>
+
+{
+  writing.length > 0 ? (
+    <ul class="card-list">
+      {writing.map((entry) => (
+        <li>
+          <PostCard entry={entry} lang={lang} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="empty-state">{tr('writing.empty')}</div>
+  )
+}

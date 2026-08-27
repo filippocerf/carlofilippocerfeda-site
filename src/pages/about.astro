@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import About from '../components/views/About.astro';
+import { t } from '../i18n/ui';
+const tr = t('it');
+---
+
+<Base lang="it" current="about" title={tr('about.title')}>
+  <About lang="it" />
+</Base>

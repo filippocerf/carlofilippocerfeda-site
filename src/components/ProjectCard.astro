@@ -1,0 +1,21 @@
+---
+import { t, localePath } from '../i18n/ui';
+import { baseSlug, type ProjectEntry } from '../utils';
+import type { Lang } from '../site.config';
+
+interface Props {
+  entry: ProjectEntry;
+  lang: Lang;
+}
+const { entry, lang } = Astro.props;
+const tr = t(lang);
+const href = localePath(lang, `projects/${baseSlug(entry.slug)}`);
+---
+
+<a class="card" href={href}>
+  <div class="card-meta">
+    {entry.data.stack.slice(0, 4).map((s) => <span class="badge">{s}</span>)}
+  </div>
+  <h3>{entry.data.title}</h3>
+  <p>{entry.data.description}</p>
+</a>

@@ -1,0 +1,60 @@
+---
+import { site } from '../site.config';
+import { t, localePath } from '../i18n/ui';
+import type { Lang } from '../site.config';
+
+interface Props {
+  lang: Lang;
+  current?: 'home' | 'writing' | 'projects' | 'about';
+}
+const { lang, current } = Astro.props;
+const tr = t(lang);
+
+// URL della stessa pagina nell'altra lingua
+const other: Lang = lang === 'it' ? 'en' : 'it';
+const otherHref =
+  current === 'writing'
+    ? localePath(other, 'writing')
+    : current === 'projects'
+      ? localePath(other, 'projects')
+      : current === 'about'
+        ? localePath(other, 'about')
+        : localePath(other);
+
+const nav = [
+  { key: 'home' as const, href: localePath(lang), label: tr('nav.home') },
+  { key: 'writing' as const, href: localePath(lang, 'writing'), label: tr('nav.writing') },
+  { key: 'projects' as const, href: localePath(lang, 'projects'), label: tr('nav.projects') },
+  { key: 'about' as const, href: localePath(lang, 'about'), label: tr('nav.about') },
+];
+---
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href={localePath(lang)} aria-label={site.name}>
+      <svg class="mark" viewBox="0 0 64 64" width="32" height="32" role="img" aria-label={site.initials} xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#d9772f"></stop>
+            <stop offset="1" stop-color="#b4531f"></stop>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="15" fill="url(#logoGrad)"></rect>
+        <text x="30" y="34" dominant-baseline="central" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="700" letter-spacing="-1.5" fill="#ffffff">CFC.</text>
+      </svg>
+      <span>{site.name}</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a href={item.href} aria-current={current === item.key ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+      <a class="lang-switch" href={otherHref} hreflang={other} aria-label={tr('lang.switchLabel')}>
+        {tr('lang.switch')}
+      </a>
+    </nav>
+  </div>
+</header>
